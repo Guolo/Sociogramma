@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore Matrice Sociometrica v3 - Analisi Profili</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrap">
+    <div class="upload-zone" id="dropZone">
+        <div class="upload-icon">📊</div>
+        <div class="upload-label"><strong>Carica il file CSV</strong></div>
+        <p class="upload-sub">Trascina il file qui o usa il tasto sotto</p>
+        <button class="btn" onclick="document.getElementById('fileInput').click()">Seleziona file</button>
+        <input type="file" id="fileInput" accept=".csv" />
+        <div id="errorMsg" style="color:red; margin-top:10px; font-size:13px;"></div>
+    </div>
+
+    <div class="example-box">
+        <strong>Formato:</strong> CSV con colonne: <code>N. Elenco, Nome, Cognome, Preferenze, Rifiuti</code><br>
+        <em>Esempio: 1, Mario, Rossi, "5, 8", "3"</em>
+    </div>
+
+    <div class="matrix-section" id="matrixSection" style="display:none">
+        <button class="btn btn-pdf" id="btnExportPdf" onclick="generatePDF()">📄 Salva in PDF</button>
+
+        <div id="matrixWrapper" class="pdf-page-container">
+            <div class="section-label">Matrice Sociometrica</div>
+            <div class="table-scroll" id="tableContainer"></div>
+        </div>
+
+        <div id="secondPageWrapper" class="pdf-page-container">
+            <div id="analysisWrapper">
+                <div class="section-label" style="margin-top:2rem">Analisi dei Profili Sociometrici</div>
+                <div class="analysis-grid" id="analysisContainer"></div>
+            </div>
+
+            <div id="sociogramWrapper">
+                <div class="section-label" style="margin-top:3rem">Sociogramma di Moreno</div>
+                <div id="sociogramContainer" style="width:100%; overflow:hidden; position:relative;">
+                  <canvas id="sociogramCanvas" style="width:100%; border:1px solid #dee2e6; border-radius:8px; background:#fafafa;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
