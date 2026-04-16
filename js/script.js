@@ -147,10 +147,12 @@ function buildMatrix(csv) {
     html += '</tr></tbody></table>';
     tableContainer.innerHTML = html;
 
-    if (students.length > 23) {
+    tableContainer.classList.remove('compact-table', 'super-compact-table');
+
+    if (students.length > 25) {
+        tableContainer.classList.add('super-compact-table');
+    } else if (students.length > 23) {
         tableContainer.classList.add('compact-table');
-    } else {
-        tableContainer.classList.remove('compact-table');
     }
 
     const profili = { leader: [], popolare: [], accettato: [], controverso: [], rifiutato: [], isolato: [] };

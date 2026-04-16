@@ -111,14 +111,18 @@ th { background: var(--color-background-secondary); color: var(--color-text-seco
 /* Stile per matrici compatte */
 .compact-table table {
     font-size: 9px !important;
+}
+
+.super-compact-table table {
+    font-size: 9px !important;
     table-layout: auto;
 }
 
-.compact-table th, .compact-table td {
+.super-compact-table th, .super-compact-table td {
     padding: 8px 1px !important;
 }
 
-.compact-table .name-col {
+.super-compact-table .name-col {
     min-width: 90px !important;
     max-width: 120px;
     font-size: 9px !important;

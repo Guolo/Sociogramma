@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Istruzioni – Generatore Matrice Sociometrica</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* ── Stili aggiuntivi solo per la pagina istruzioni ── */
+        .steps-list {
+            list-style: none;
+            counter-reset: step-counter;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .steps-list li {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: #fff;
+            border: 1px solid var(--color-border-secondary);
+            border-radius: var(--border-radius-md);
+            padding: 1rem 1.25rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .steps-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            background: var(--color-border-primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .step-text {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        .step-text code {
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: #3730a3;
+        }
+
+        /* ── Tabella esempio ── */
+        .example-section {
+            margin-top: 3rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .example-table-wrap {
+            overflow-x: auto;
+            margin-top: 1rem;
+            border: 1px solid var(--color-border-tertiary);
+            border-radius: 8px;
+        }
+
+        .example-table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 13px;
+        }
+
+        .example-table th {
+            background: var(--color-background-secondary);
+            color: var(--color-text-secondary);
+            padding: 10px 14px;
+            border: 1px solid var(--color-border-tertiary);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .example-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--color-border-tertiary);
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .example-table td.note-col {
+            text-align: left;
+            color: var(--color-text-secondary);
+            font-style: italic;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .example-table tr:nth-child(even) td {
+            background: #fafbfc;
+        }
+
+        /* ── Nota navigazione ── */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-bar a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-border-primary);
+            text-decoration: none;
+            padding: 7px 14px;
+            border: 1px solid var(--color-border-primary);
+            border-radius: var(--border-radius-md);
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .nav-bar a:hover {
+            background: var(--color-border-primary);
+            color: #fff;
+        }
+
+        .page-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .hero-box {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 1.75rem 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .tip-box {
+            margin-top: 1.5rem;
+            background: #fff9db;
+            border: 1px solid #ffe066;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+
+    <!-- Navigazione -->
+    <div class="nav-bar">
+        <a href="../index.html">← Torna al generatore</a>
+    </div>
+
+    <!-- Titolo pagina -->
+    <div class="hero-box">
+        <div style="font-size:40px; margin-bottom:0.75rem;">📘</div>
+        <div class="page-title">Come usare il Generatore</div>
+        <div class="page-subtitle">Segui i passi per preparare il file CSV e ottenere la tua matrice sociometrica.</div>
+    </div>
+
+    <!-- Passi -->
+    <div class="matrix-section" style="display:block">
+        <div class="section-label">Istruzioni passo per passo</div>
+
+        <ol class="steps-list">
+            <li>
+                <div class="step-number">1</div>
+                <div class="step-text">
+                    <strong>Compila il modello</strong> con i nomi e cognomi degli studenti, assegnando a ciascuno un <em>Numero Elenco</em> progressivo nella prima colonna.
+                </div>
+            </li>
+            <li>
+                <div class="step-number">2</div>
+                <div class="step-text">
+                    <strong>Nella colonna "Preferenza"</strong> inserisci il <em>Numero Elenco</em> del ragazzo scelto (puoi inserire più numeri separati da virgola).
+                </div>
+            </li>
+            <li>
+                <div class="step-number">3</div>
+                <div class="step-text">
+                    <strong>Nella colonna "Rifiuto"</strong> inserisci il <em>Numero Elenco</em> del ragazzo rifiutato (anche qui, più numeri separati da virgola).
+                </div>
+            </li>
+            <li>
+                <div class="step-number">4</div>
+                <div class="step-text">
+                    <strong>Esporta il file in formato CSV</strong>: apri Google Fogli (o Excel), poi clicca su
+                    <code>File</code> → <code>Scarica</code> → <code>Valori separati da virgola (.csv)</code>.
+                </div>
+            </li>
+            <li>
+                <div class="step-number">5</div>
+                <div class="step-text">
+                    <strong>Carica il file <code>.csv</code></strong> nel sito trascinandolo nell'area apposita oppure cliccando su <em>"Seleziona file"</em>. La matrice e i profili verranno generati automaticamente.
+                </div>
+            </li>
+        </ol>
+
+        <div class="tip-box">
+            💡 <strong>Suggerimento:</strong> Usa il template di Google Fogli con le colonne già pronte:
+            <a href="https://docs.google.com/spreadsheets/d/1czB_r4ttc6Y2LOE5bDmuj-4J6Ess-MWruzDOpu_QP8E/copy" target="_blank">
+                Clicca qui per creare una copia del modello
+            </a>.<br>
+            Lascia vuota la cella se lo studente non esprime preferenze o rifiuti.
+        </div>
+    </div>
+
+    <!-- Esempio -->
+    <div class="example-section">
+        <div class="section-label">Esempio di compilazione</div>
+
+        <div class="example-table-wrap">
+            <table class="example-table">
+                <thead>
+                    <tr>
+                        <th>N. Elenco</th>
+                        <th>Nome</th>
+                        <th>Cognome</th>
+                        <th>Preferenza</th>
+                        <th>Rifiuto</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Alessandro</td>
+                        <td>Rossi</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td class="note-col">→ Alessandro ha scelto Matteo e rifiutato Sofia</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Sofia</td>
+                        <td>Bianchi</td>
+                        <td>2, 3</td>
+                        <td>4</td>
+                        <td class="note-col">→ Sofia ha scelto Alessandro e Matteo e rifiutato Giulia</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Matteo</td>
+                        <td>Ferrari</td>
+                        <td>1</td>
+                        <td>2, 4</td>
+                        <td class="note-col">→ Matteo ha scelto Alessandro e rifiutato Sofia e Giulia</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Giulia</td>
+                        <td>Esposito</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td class="note-col">→ Giulia ha scelto Alessandro e rifiutato Sofia</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="example-box" style="margin-top:1.25rem">
+            <strong>Formato CSV corrispondente:</strong><br>
+            <code>N. Elenco, Nome, Cognome, Preferenze, Rifiuti</code><br>
+            <code>1, Alessandro, Rossi, 3, 2</code><br>
+            <code>2, Sofia, Bianchi, "2, 3", 4</code><br>
+            <code>3, Matteo, Ferrari, 1, "2, 4"</code><br>
+            <code>4, Giulia, Esposito, 1, 2</code>
+        </div>
+    </div>
+
+    <!-- Torna al sito -->
+    <div style="text-align:center; margin-top:2.5rem;">
+        <a href="../index.html" class="btn" style="font-size:15px; padding:12px 32px; border-color: var(--color-border-primary); color: var(--color-border-primary); text-decoration: none;">
+            <span style="text-decoration: none;">📊</span>
+            Vai al Generatore
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
